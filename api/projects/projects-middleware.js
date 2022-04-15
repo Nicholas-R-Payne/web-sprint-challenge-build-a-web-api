@@ -24,7 +24,7 @@ async function validateProjectId(req, res, next) {
 async function validateProjectBody(req, res, next) {
     try {
         const { name, description, completed } = req.body
-        if (!name || !description || !completed == null) {
+        if (!name || !description || completed == null) {
             res.status(400).json({
                 message: 'Required field is missing'
             })
