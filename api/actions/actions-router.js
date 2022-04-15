@@ -5,6 +5,14 @@ const Action = require('./actions-model')
 
 const router = express.Router()
 
+router.get('/', (req, res, next) => {
+    Action.get()
+        .then(actions => {
+            res.json(actions)
+        })
+        .catch(next)
+})
+
 router.use((err, req, res) => {
     res.status(err.status || 500).json({
       message: err.message,
