@@ -23,8 +23,8 @@ async function validateActionId(req, res, next) {
 
 async function validateActionBody(req, res, next) {
     try {
-        const { notes, description, project_id } = req.body
-        if (!notes || !description || !project_id) {
+        const { notes, description, completed, project_id } = req.body
+        if (!notes || !description || completed == null || !project_id) {
             res.status(400).json({
                 message: 'Required field is missing'
             })

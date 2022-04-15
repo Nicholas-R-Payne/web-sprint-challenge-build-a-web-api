@@ -27,6 +27,14 @@ router.post('/', validateActionBody, (req, res, next) => {
         .catch(next)
 })
 
+router.put('/:id', validateActionId, validateActionBody, (req, res, next) => {
+    Action.update(req.params.id, req.body)
+        .then(actions => {
+            res.json(actions)
+        })
+        .catch(next)
+})
+
 router.use((err, req, res) => {
     res.status(err.status || 500).json({
       message: err.message,
