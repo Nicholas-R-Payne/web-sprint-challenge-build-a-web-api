@@ -21,6 +21,26 @@ async function validateActionId(req, res, next) {
     }
 }
 
+async function validateActionBody(req, res, next) {
+    try {
+        const { notes, description, project_id } = req.body
+        if (!notes || !description || !project_id) {
+            res.status(400).json({
+                message: 'Required field is missing'
+            })
+        } else {
+            next()
+        }
+    } catch (err) {
+        res.status(500).json({
+            message: "The action information could not be retrieved",
+            err: err.message,
+            stack: err.stack
+        })
+    }
+}
+
 module.exports = {
-    validateActionId
+    validateActionId,
+    validateActionBody
 }
