@@ -35,6 +35,15 @@ router.put('/:id', validateActionId, validateActionBody, (req, res, next) => {
         .catch(next)
 })
 
+router.delete('/:id', validateActionId, async (req, res, next) => {
+    try {
+        await Action.remove(req.params.id)
+        res.json(req.action)
+    } catch (err) {
+        next(err)
+    }
+})
+
 router.use((err, req, res) => {
     res.status(err.status || 500).json({
       message: err.message,
