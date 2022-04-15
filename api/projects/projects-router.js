@@ -52,4 +52,11 @@ router.get('/:id/actions', validateProjectId, (req, res, next) => {
         .catch(next)
 })
 
+router.use((err, req, res) => {
+    res.status(err.status || 500).json({
+      message: err.message,
+      stack: err.stack
+    })
+})
+
 module.exports = router;
